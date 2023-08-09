@@ -30,3 +30,6 @@ class HabitLog(models.Model):
     '''
     habit = models.ForeignKey(Habit, on_delete = models.CASCADE)
     date_event = models.DateField()
+
+    def __str__(self):
+        return f'{self.habit} - {self.date_event}'
