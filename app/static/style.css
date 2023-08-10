@@ -7,12 +7,25 @@ Design inspired by:
 https://dribbble.com/shots/15066371-Phone-Clean-App
 .*/
 
+
+/* ====================== */
+/* General Styling */
+/* ====================== */
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Mukta', sans-serif;
     font-weight: 200;
+    --primary-color: #0C273D;
+    --primary-sub-color: #54D0ED;
+    --contrast-color: #70B85D;
+    --contrast-color-darker: #5b964d;
+    --neutral-color: #FFFEF1;
+    --neutral-color-darker: #cbcbc6;
+
 }
 
 body {
@@ -20,11 +33,11 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background: #4b6cb7;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: white;
-    margin-top: 2rem;
+    background: var(--primary-color);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, var(--primary-color), var(--primary-sub-color));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, var(--primary-color), var(--primary-sub-color)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: var(--neutral-color);
+    margin-top: 1rem;
 
 
 }
@@ -33,12 +46,15 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     text-align: center;
+    text-shadow: 3px 3px 3px #000000;
+    margin-top: 1rem;
 }
 
 .subtitle {
     font-size: 1rem;
     text-align: center;
     font-style: italic;
+    text-shadow: 3px 3px 3px #000000;
 }
 
 .container {
@@ -46,26 +62,38 @@ body {
     /*background-color: rgba(255, 255, 255, 0.061);*/
     border-radius: 0.5rem;
     padding: 0.5rem;
-    margin: 1rem;
+    margin: 2rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* ====================== */
+/* Login Styling */
+/* ====================== */
+
 .login-head {
+    width: 100%;
     font-size: 1.5rem;
     text-align: center;
+    text-shadow: 3px 3px 3px #000000;
 }
 
 .login-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 1rem;
 }
 
 input[type="text"], input[type="password"] {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
     margin: 0;
     border: 0;
     outline: none;
+    background-color: var(--neutral-color);
+    box-shadow: 5px 5px 10px #9797975e;
 }
 
 input[type="text"] {
@@ -73,39 +101,91 @@ input[type="text"] {
     border-bottom: 1px solid rgba(128, 128, 128, 0.468);
 }
 
+
+
 input[type="submit"] {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: 0.5rem;
     margin: 0;
     border: 0;
-    background-color:#182848;
-    color: white;
+    background-color: var(--contrast-color);
+    color: var(--neutral-color);
     cursor: pointer;
     border-radius: 0 0 1rem 1rem;
+    box-shadow: 5px 5px 10px #9797975e;
 }
 
 input[type="submit"]:hover {
-    background-color:#1f345f;
+    background-color:var(--contrast-color-darker);
 }
 
 .icon {
+    margin-bottom: 1rem;
     font-size: 6rem;
     text-align: center;
     padding: 0 0 1rem 0;
-    text-shadow: 5px 5px 5px #1f345f;
+    text-shadow: 5px 5px 10px #0303035e;
 }
+
+.message-box {
+    width: 300px;
+    background-color: rgba(249, 153, 153, 0.341);
+    text-align: center;
+    border-radius: 1rem;
+}
+
+
+
+
+/* ====================== */
+/* Footer Styling */
+/* ====================== */
 
 .social-media {
     font-size: 2rem;
     text-align: center;
+
 }
 
 .social-media a {
     text-decoration: none;
-    color: white;
+    color: var(--neutral-color);
     margin-inline: 0.3rem;
+    text-shadow: 5px 5px 10px #0303035e;
 }
 
 .social-media :hover {
-    color: rgb(201, 201, 201);
+    color: var(--neutral-color-darker);
+}
+
+
+
+
+/* ====================== */
+/* Habits Panel Styling */
+/* ====================== */
+
+.habits-header {
+    width: 350px;
+    /*background-color: rgba(255, 255, 255, 0.061);*/
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.habits-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+}
+
+.habits-header a {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--contrast-color);
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    color: var(--neutral-color);
+    border-radius: 0.5rem;
 }

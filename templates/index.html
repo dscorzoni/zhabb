@@ -3,13 +3,19 @@
 
 <div class="container">
     <h1 class="login-head">Log-In</h1>
-    <form class="login-form" action="#" method="post">
+    <form class="login-form" action="{% url 'auth' %}" method="post">
         {% csrf_token %}
         <i class="fa-solid fa-user icon"></i>
         <input type="text" name="username" id="username" placeholder="Your username" />
         <input type="password" name="password" id="password" placeholder="Your password" />
         <input type="submit" value="Login" />
     </form>
+    {% if message is not None %}
+    <div class="message-box">
+        {{ message }}
+    </div>
+    {% endif %}
+
 </div>
 
 {% endblock content %}
