@@ -13,10 +13,26 @@
 <body>
     <header class="habits-header">
         <h2>Habits Control</h2>
-        <a href=" {% url 'logout' %}" class="logout-button">Logout</a>
+        <a href=" {% url 'logout' %}" class="logout-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
     </header>
-    <main>
-        
+    <main class="habits-main">
+        {% if habits %}
+        Welcome <span class="habits-user">{{ request.user.username }}</span>, here are your habits:
+        {% else %}
+        Welcome <span class="habits-user">{{ request.user.username }}</span>, add habits using the button below:
+        {% endif %}
+        <div class="habits-list">
+            {% for habit in habits %}
+            <div class="habit-item">
+                <span>{{ habit.name }}</span>
+                <a href="{% url 'habits-check' pk=habit.id %}" class="btn-complete"><i class="fa-solid fa-square-check"></i></a>
+            </div>
+            {% endfor %}
+        <div class="bottom-panel">
+            <a href="#"><i class="fa-solid fa-plus"></i> New Habit</a>
+            <a href="#"><i class="fa-solid fa-chart-simple"></i> Progress Charts</a>
+        </div>
+        </div>
     </main>
     <footer>
         Copyright &copy Danilo Scorzoni Ré

@@ -29,7 +29,8 @@ class HabitLog(models.Model):
     This model specify the habit logged. It's linked to the Habit model.
     '''
     habit = models.ForeignKey(Habit, on_delete = models.CASCADE)
+    status = models.BooleanField(default = False)
     date_event = models.DateField()
 
     def __str__(self):
-        return f'{self.habit} - {self.date_event}'
+        return f'{self.habit} - {self.date_event} - {self.status}'

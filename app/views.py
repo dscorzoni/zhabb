@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 
+from .models import (
+    Habit
+)
 from .forms import (
     LoginForm
 )
@@ -60,6 +63,14 @@ class Logout(View):
 class HabitsMain(View):
     def get(self, request):
         if request.user.is_authenticated:
-            return render(request, 'habits.html', {})
+            habits = Habit.objects.filter(user = request.user)
+            return render(request, 'habits.html', {"habits": habits})
         else:
             return redirect('index')
+
+
+
+
+class HabitLog(View):
+    def get(self, request):
+        return HttpResponse('Habit Logged!')
