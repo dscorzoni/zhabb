@@ -62,14 +62,14 @@ body {
     /*background-color: rgba(255, 255, 255, 0.061);*/
     border-radius: 0.5rem;
     padding: 0.5rem;
-    margin: 2rem 1rem 1rem 1rem;
+    margin: 1rem 1rem 1rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 footer {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 /* ====================== */
@@ -138,7 +138,24 @@ input[type="submit"]:hover {
     border-radius: 1rem;
 }
 
+.newuser {
+    margin-top: 1rem;
+}
 
+.btn-signup {
+    margin-left: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--contrast-color);
+    padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+    color: var(--neutral-color);
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 10px #0303035e;
+}
+
+.btn-signup:hover {
+    background-color: var(--contrast-color-darker);
+}
 
 
 /* ====================== */
@@ -243,7 +260,11 @@ input[type="submit"]:hover {
 }
 
 .btn-complete:hover {
-    color: var(--contrast-color)
+    color: var(--contrast-color);
+}
+
+.status-complete {
+    color: var(--contrast-color);
 }
 
 .bottom-panel {
@@ -264,7 +285,6 @@ input[type="submit"]:hover {
 }
 
 .bottom-panel > a:hover {
-
     background-color: var(--contrast-color-darker);
-
 }
+

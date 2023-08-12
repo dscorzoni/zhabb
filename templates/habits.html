@@ -12,7 +12,7 @@
 </head>
 <body>
     <header class="habits-header">
-        <h2>Habits Control</h2>
+        <h2>Habits Tracking</h2>
         <a href=" {% url 'logout' %}" class="logout-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
     </header>
     <main class="habits-main">
@@ -24,13 +24,17 @@
         <div class="habits-list">
             {% for habit in habits %}
             <div class="habit-item">
-                <span>{{ habit.name }}</span>
+                <span>{{ habit.habit.name }}</span>
+                {% if habit.status %}
+                <a href="{% url 'habits-check' pk=habit.id %}" class="btn-complete status-complete"><i class="fa-solid fa-square-check"></i></a>
+                {% else %}
                 <a href="{% url 'habits-check' pk=habit.id %}" class="btn-complete"><i class="fa-solid fa-square-check"></i></a>
+                {% endif %}
             </div>
             {% endfor %}
         <div class="bottom-panel">
             <a href="#"><i class="fa-solid fa-plus"></i> New Habit</a>
-            <a href="#"><i class="fa-solid fa-chart-simple"></i> Progress Charts</a>
+            <a href="#"><i class="fa-solid fa-chart-simple"></i> Progress Check</a>
         </div>
         </div>
     </main>

@@ -8,13 +8,15 @@
         <i class="fa-solid fa-user icon"></i>
         <input type="text" name="username" id="username" placeholder="Your username" />
         <input type="password" name="password" id="password" placeholder="Your password" />
-        <input type="submit" value="Login" />
+        <input type="submit" value="Sign-in" />
     </form>
     {% if message is not None %}
     <div class="message-box">
         {{ message }}
     </div>
     {% endif %}
+
+    <p class="newuser">New user? <a href="#" class="btn-signup">Sign-Up</a></p>
 
 </div>
 
