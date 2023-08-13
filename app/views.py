@@ -9,7 +9,8 @@ from .models import (
     HabitLog
 )
 from .forms import (
-    LoginForm
+    LoginForm,
+    NewHabitForm
 )
 
 
@@ -99,3 +100,32 @@ class HabitLogView(View):
         habit_log.status = not habit_log.status
         habit_log.save()
         return redirect('habits')
+
+
+
+
+class NewHabit(View):
+    def get(self, request):
+        return render(request, 'new_habit.html', {})
+
+    def post(self, request):
+        form = NewHabitForm(request.POST)
+        if form.is_valid():
+            new_habit = Habit(
+                user = request.user,
+                name = form.cleaned_data['name'],
+                description = form.cleaned_data['description'],
+                goal = form.cleaned_data['goal'],
+                frequency = form.cleaned_data['frequency'],
+                date_start = datetime.now().date()
+            )
+            new_habit.save()
+            new_habit_log = HabitLog(
+                habit = new_habit,
+                status = False,
+                date_event = datetime.now().date()
+            )
+            new_habit_log.save()
+            return redirect('habits')
+        else:
+            return render(request, 'new_habit.html', {'message':'All fields are required.'})

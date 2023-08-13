@@ -1,0 +1,34 @@
+{% extends "base_internal.html" %}
+{% block content %}
+
+<header class="habits-header">
+    <h2>New Habit</h2>
+    <a href=" {% url 'logout' %}" class="logout-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+</header>
+<main class="new-habit-main">
+    <h3>Add your habit information below:</h3>
+    <form action="{% url 'new-habit' %}" method="post" class="new-habit-form">
+        {% csrf_token %}
+        <div class="radio-group">
+            <div class="radio-option">
+                <input type="radio" name="frequency" value="daily" id="daily" />
+                <label for="daily">Daily</label>
+            </div>
+            <div class="radio-option">
+                <input type="radio" name="frequency" value="weekly" id="weekly" />
+                <label for="weekly">Weekly</label>
+            </div>
+        </div>
+        <input type="text" name="name" id="habit-name" placeholder="Habit name" class="new-habit-text" />
+        <input type="text" name="description" id="habit-description" placeholder="Habit description" />
+        <input type="number" name="goal" id="habit-goal" placeholder="How many times per period?" />
+        <input type="submit" value="+ Add Habit" class="btn-add" />
+        {% if message is not None %}
+        <div class="message-box">
+            {{ message }}
+        </div>
+        {% endif %}
+    </form>
+</main>
+
+{% endblock content %}
