@@ -197,6 +197,7 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
+
 .habits-header h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
@@ -293,8 +294,51 @@ input[type="submit"]:hover {
 
 /* New Habit Page */
 
+.new-habit-header {
+    width: 350px;
+    /*background-color: rgba(255, 255, 255, 0.061);*/
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-habit-header div {
+    display: flex;
+    align-items: center;
+}
+
+.new-habit-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+}
+
+.back-icon {
+    color: var(--neutral-color);
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+.logout-button {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--contrast-color);
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    color: var(--neutral-color);
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 10px #0303035e;
+}
+
+.logout-button:hover {
+    background-color: var(--contrast-color-darker);
+}
+
 .new-habit-main {
     width: 350px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -305,7 +349,7 @@ input[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .new-habit-form > input[type="text"], input[type="number"] {
@@ -326,6 +370,7 @@ input[type="submit"]:hover {
     align-items: center;
     gap: 1rem;
     padding: 0.5rem;
+    font-size: 1.2rem;
 }
 
 .btn-add {
@@ -344,4 +389,45 @@ input[type="submit"]:hover {
 
 .new-habit-main .message-box {
     margin-top: 1rem;
+}
+
+
+
+
+/* New User Page */
+.newuser-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.newuser-form-field {
+    font-size: 1.1rem;
+    width: 300px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background-color: var(--neutral-color);
+    box-shadow: 5px 5px 10px #9797975e;
+}
+
+.form-head {
+    border-radius: 1rem 1rem 0 0;
+}
+
+.newuser-submit {
+    width: 300px;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    margin: 0;
+    border: 0;
+    background-color: var(--contrast-color);
+    color: var(--neutral-color);
+    cursor: pointer;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 5px 5px 10px #9797975e;
 }

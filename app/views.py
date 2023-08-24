@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from datetime import datetime
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import hashers
 
 from .models import (
     Habit,
@@ -10,7 +13,8 @@ from .models import (
 )
 from .forms import (
     LoginForm,
-    NewHabitForm
+    NewHabitForm,
+    NewUserForm
 )
 
 
@@ -81,9 +85,6 @@ class HabitsMainView(View):
                     new_habit_log = HabitLog(habit = habit, status = False, date_event = datetime.now().date())
                     new_habit_log.save()
             habits_out = HabitLog.objects.filter(habit__in = habit_ids, date_event = datetime.now().date())
-            print(habits_out)
-            for a in habits_out:
-                print(a.habit.name)
             return render(request, 'habits.html', {"habits": habits_out})
         else:
             return redirect('index')
@@ -129,3 +130,36 @@ class NewHabit(View):
             return redirect('habits')
         else:
             return render(request, 'new_habit.html', {'message':'All fields are required.'})
+
+
+
+
+
+class NewUser(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('habits')
+        else:
+            return render(request, 'new_user.html', {})
+
+    def post(self, request):
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            # Check if username exists:
+            try:
+                new_user = User.objects.get(username = form.cleaned_data['username'])
+                if new_user:
+                    return render(request, 'new_user.html', {'message': 'This username already exist, choose a new one.'})
+            except ObjectDoesNotExist:
+                if form.cleaned_data['password'] == form.cleaned_data['confirm_password']:
+                    new_user = User(
+                        username = form.cleaned_data['username'],
+                        email = form.cleaned_data['email'],
+                        password = hashers.make_password(form.cleaned_data['password'])
+                        )
+                    new_user.save()
+                    return render(request, 'index.html', {'message': 'User is created, you can log-in now.'})
+                else:
+                    return render(request, 'new_user.html', {'message': 'Passwords are not matching.'})
+        else:
+            return render(request, 'new_user.html', {'message': 'Form is invalid.'})

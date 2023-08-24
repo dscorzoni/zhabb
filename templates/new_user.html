@@ -1,0 +1,28 @@
+{% extends "base_internal.html" %}
+{% block content %}
+
+<header class="new-habit-header">
+    <div>
+    <a href="{% url 'index' %}" class="back-icon"><i class="fa-solid fa-chevron-left"></i></a>
+    <h2>New User</h2>
+    </div>
+</header>
+
+<main class="new-habit-main">
+    <h3>Please add your personal information below:</h3>
+    <form action="{% url 'newuser' %}" method="post" class="newuser-form">
+        {% csrf_token %}
+        <input type="text" name="username" id="username" placeholder="Username" class="newuser-form-field form-head" required />
+        <input type="email" name="email" id="email" placeholder="Email" class="newuser-form-field" required />
+        <input type="password" name="password" id="password" placeholder="Password" class="newuser-form-field" required />
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" class="newuser-form-field" required />
+        <input type="submit" value="+ Create User" class="newuser-submit" />
+        {% if message is not None %}
+        <div class="message-box">
+            {{ message }}
+        </div>
+        {% endif %}
+    </form>
+</main>
+
+{% endblock content %}
