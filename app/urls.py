@@ -9,4 +9,5 @@ urlpatterns = [
     path('habits/check/<int:pk>', views.HabitLogView.as_view(), name='habits-check'),
     path('habits/new/', views.NewHabit.as_view(), name='new-habit'),
     path('newuser/', views.NewUser.as_view(), name='newuser'),
+    path('progress/', views.ProgressCheck.as_view(), name='progress')
 ]

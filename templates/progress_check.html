@@ -1,0 +1,39 @@
+{% extends "base_internal.html" %}
+{% block content %}
+
+<header class="new-habit-header">
+    <div>
+    <a href="{% url 'habits' %}" class="back-icon"><i class="fa-solid fa-chevron-left"></i></a>
+    <h2>Progress</h2>
+    </div>
+
+    <a href=" {% url 'logout' %}" class="logout-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+</header>
+
+<main class="habits-main">
+
+    {% if habits %}
+    <p class="progress-explanation">
+        Each habit has a complete rate, which means how many days you completed the habit divided by the total days logged in the app.
+    </p>
+    <div class="progress-list">
+        <div class="progress-habit-header">
+            <p class="progress-name">Habit</p>
+            <p class="progress-complete">Complete Rate %</p>
+            <p class="progress-days">Total Days</p>
+        </div>
+        {% for habit in habits %}
+            <div class="progress-habit">
+            <p class="progress-name">{{ habit.name }}</p>
+            <p class="progress-complete">{{ habit.complete_rate }} %</p>
+            <p class="progress-days">{{ habit.total_days }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="progress-explanation">You need to add habits to check progress in this page.</p>
+    {% endif %}
+
+</main>
+
+{% endblock content %}

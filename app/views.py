@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import hashers
+from django.db.models import Count
 
 from .models import (
     Habit,
@@ -163,3 +164,32 @@ class NewUser(View):
                     return render(request, 'new_user.html', {'message': 'Passwords are not matching.'})
         else:
             return render(request, 'new_user.html', {'message': 'Form is invalid.'})
+
+
+
+
+class ProgressCheck(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            user_habits = Habit.objects.filter(user = request.user)
+            habits_logs = HabitLog.objects.filter(habit__in = user_habits).values('habit__name', 'status').annotate(count = Count('id')).order_by()
+
+            # Parsing results to return one object per habit
+            habits_output = []
+            for habit in user_habits:
+                habit_output = {}
+                single_habit = habits_logs.filter(habit__name = habit.name)
+                for row in single_habit:
+                    if row['status'] == False:
+                        habit_output['name'] = row['habit__name']
+                        habit_output['status_false'] = row['count']
+                    else:
+                        habit_output['status_true'] = row['count']
+                habit_output['total_days'] = habit_output['status_false'] + habit_output['status_true']
+                habit_output['complete_rate'] = round(float(habit_output['status_true'] / habit_output['total_days'])*100,1)
+                habits_output.append(habit_output)
+            print(habits_output)
+
+            return render(request, 'progress_check.html', {'habits': habits_output})
+        else:
+            return redirect('index')
