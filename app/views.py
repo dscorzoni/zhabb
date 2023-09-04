@@ -24,7 +24,6 @@ class IndexView(View):
     '''
     Render the login page if user is not logged-in.
     Otherwise, redirect user to the HabitsMain view.
-    --- To be implemented
     '''
     def get(self, request):
         if request.user.is_authenticated:
@@ -107,8 +106,16 @@ class HabitLogView(View):
 
 
 class NewHabit(View):
+    '''
+    The NewHabit view has get and post methods to display or add new habits through a form submitted by the user.
+    GET: renders the new habit page if user is authenticated. Otherwise redirects to index for log-in.
+    POST: add a new habit to database.
+    '''
     def get(self, request):
-        return render(request, 'new_habit.html', {})
+        if request.user.is_authenticated:
+            return render(request, 'new_habit.html', {})
+        else:
+            return redirect('index')
 
     def post(self, request):
         form = NewHabitForm(request.POST)
@@ -137,6 +144,11 @@ class NewHabit(View):
 
 
 class NewUser(View):
+    '''
+    NewUser view has get and post methods to handle new users.
+    GET: If the user is authenticated, they are redirected to the habits URL. Otherwise they are rendered the new user page.
+    POST: Handle user registration with checks on existing username and password matching.
+    '''
     def get(self, request):
         if request.user.is_authenticated:
             return redirect('habits')
@@ -169,6 +181,10 @@ class NewUser(View):
 
 
 class ProgressCheck(View):
+    '''
+    ProgressCheck view only has a GET method, to display the summary stats of habits logged in the system.
+    User needs to be authenticated, if not they will be redirected to index page for log-in.
+    '''
     def get(self, request):
         if request.user.is_authenticated:
             user_habits = Habit.objects.filter(user = request.user)
