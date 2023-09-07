@@ -200,11 +200,18 @@ class ProgressCheck(View):
                         habit_output['name'] = row['habit__name']
                         habit_output['status_false'] = row['count']
                     else:
+                        habit_output['name'] = row['habit__name']
                         habit_output['status_true'] = row['count']
-                habit_output['total_days'] = habit_output['status_false'] + habit_output['status_true']
-                habit_output['complete_rate'] = round(float(habit_output['status_true'] / habit_output['total_days'])*100,1)
+                if 'status_false' not in habit_output:
+                    habit_output['total_days'] = habit_output['status_true']
+                    habit_output['complete_rate'] = 100
+                elif 'status_true' not in habit_output:
+                    habit_output['total_days'] = habit_output['status_false']
+                    habit_output['complete_rate'] = 0
+                else:
+                    habit_output['total_days'] = habit_output['status_false'] + habit_output['status_true']
+                    habit_output['complete_rate'] = round(float(habit_output['status_true'] / habit_output['total_days'])*100,1)
                 habits_output.append(habit_output)
-            print(habits_output)
 
             return render(request, 'progress_check.html', {'habits': habits_output})
         else:

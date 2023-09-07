@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/d48fea5d-ee3d-463a-b66d-71a51cc4c1e5/resourceGroups/zhabb-app/providers/Microsoft.Web/sites/zhabb-app",
+  "appService.deploySubpath": "."
+}
