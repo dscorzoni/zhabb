@@ -97,10 +97,13 @@ class HabitLogView(View):
     Toggle the status of a habit and redirect to habits page.
     '''
     def get(self, request, pk):
-        habit_log = HabitLog.objects.get(id = pk)
-        habit_log.status = not habit_log.status
-        habit_log.save()
-        return redirect('habits')
+        if request.user.is_authenticated:
+            habit_log = HabitLog.objects.get(id = pk)
+            habit_log.status = not habit_log.status
+            habit_log.save()
+            return redirect('habits')
+        else:
+            return redirect('index')
 
 
 
@@ -162,7 +165,7 @@ class NewUser(View):
             try:
                 new_user = User.objects.get(username = form.cleaned_data['username'])
                 if new_user:
-                    return render(request, 'new_user.html', {'message': 'This username already exist, choose a new one.'})
+                    return render(request, 'new_user.html', {'message': 'This username already exists, choose a new one.'})
             except ObjectDoesNotExist:
                 if form.cleaned_data['password'] == form.cleaned_data['confirm_password']:
                     new_user = User(
